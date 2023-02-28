@@ -1,0 +1,59 @@
+{
+  "name": "react-pdf-thumbnail-2",
+  "version": "1.0.0",
+  "description": "A fixed up React PDF Thumbnail Creator. Based of the https://www.npmjs.com/package/react-pdf-thumbnail which had a few issues for me",
+  "main": "index.js",
+  "scripts": {
+    "start": "start-storybook -p 6006",
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs",
+    "build-patch": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version patch && npm publish",
+    "build-minor": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version minor && npm publish",
+    "build-major": "rm -rf /dist && npm run build:esm && npm run build:cjs && npm run copy-esm && npm run copy-cjs && npm version major && npm publish",
+    "build:esm": "tsc",
+    "build:cjs": "tsc --module CommonJS --outDir dist/cjs",
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Joshua-Augment/react-pdf-thumbnail-2.git"
+  },
+  "keywords": [
+    "react",
+    "pdf-thumbnail",
+    "thumbnail"
+  ],
+  "author": "joshuajs",
+  "license": "MIT",  
+  "dependencies": {
+    "pdfjs-dist" : "^3.4.120"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.20.12",
+    "@storybook/addon-actions": "^6.5.16",
+    "@storybook/addon-essentials": "^6.4.22",
+    "@storybook/addon-interactions": "^6.5.16",
+    "@storybook/addon-links": "^6.5.16",
+    "@storybook/builder-webpack4": "^6.5.16",
+    "@storybook/manager-webpack4": "^6.5.16",
+    "@storybook/react": "^6.1.21",
+    "@storybook/testing-library": "^0.0.13",
+    "@types/node": "^18.13.0",
+    "@types/react": "^18.0.28",
+    "@types/react-color": "^3.0.6",
+    "@types/react-datepicker": "^4.8.0",
+    "@types/react-dom": "^18.0.10",
+    "babel-loader": "^8.3.0",
+    "copyfiles": "^2.4.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "typescript": "^4.9.5"
+  },
+  "peerDependencies": {
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0"
+  },
+  "bugs": {
+    "url": "https://github.com/Joshua-Augment/react-pdf-thumbnail-2/issues"
+  },
+  "homepage": "https://github.com/Joshua-Augment/react-pdf-thumbnail-2#readme"
+}
