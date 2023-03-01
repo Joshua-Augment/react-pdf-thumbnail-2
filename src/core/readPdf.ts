@@ -1,9 +1,10 @@
 import { Config, DocTypes } from './interface';
 import { createCanvas, createImage } from "./createThumbImage";
+import { PDFDocumentProxy } from 'pdfjs-dist';
 const pdfjsDist =  require("pdfjs-dist")
 
 const readPdf = (pdf:DocTypes, config:Config) => {
-  pdfjsDist.getDocument(pdf).promise.then( doc => {
+  pdfjsDist.getDocument(pdf).promise.then( (doc:PDFDocumentProxy) => {
 		const pages:number[] = [];
     if (config.pages) {
       if (Array.isArray(config.pages)) {
@@ -29,11 +30,10 @@ const readPdf = (pdf:DocTypes, config:Config) => {
 		return Promise.all(
 			pages.map(async num => {
 				try {
-          const page = await doc
-            .getPage(num);
+          const page = await doc.getPage(num);
           createCanvas(page, config).then((canvas) => {
             console.log(canvas);
-            return createImage(canvas, config.name ?? 'output-image.jpg');
+            return createImage(canvas as HTMLCanvasElement, config.name ?? 'output-image.jpg');
           });
         } catch (err) {
           return [false, err];

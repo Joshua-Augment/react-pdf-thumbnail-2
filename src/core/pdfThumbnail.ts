@@ -8,8 +8,7 @@ const pdfThumbnail = (data:File | File[], config: Config) => {
 		const file = Array.isArray(data) ? data[0] : data; 
     const arrBuffer = await file.arrayBuffer()
 		const isVideo = config.fileName === undefined;
-		const { fileName, extension } = getExtension(config.fileName ?? file.name,isVideo);
-		const newFileName = `${fileName}.${extension}`;
+		const { extension } = getExtension(config.fileName ?? file.name,isVideo);
 
 		if (/(pdf|zip|doc)$/gi.test(extension)) {
 			try {

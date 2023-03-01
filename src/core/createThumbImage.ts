@@ -1,3 +1,4 @@
+import { PDFPageProxy } from 'pdfjs-dist/types/web/interfaces';
 import {Config} from "./interface"
 
 export const dataURLtoFile = (dataURl : string, filename: string) => {
@@ -30,9 +31,9 @@ export const createImage = (canvas:HTMLCanvasElement, filename:string) => {
 	return [success, file, image, imageUrl];
 };
 
-export const createCanvas = (page, config:Config) => {
+export const createCanvas = async (page:PDFPageProxy, config:Config):Promise<HTMLCanvasElement | string> => {
 	try {
-		var vp = page.getViewport(1);
+		var vp = page.getViewport();
 		const canvas = document.createElement('canvas');
 		canvas.width = config.width || 300;
 		canvas.height = config.height || 200;
@@ -40,17 +41,17 @@ export const createCanvas = (page, config:Config) => {
     
 		return page
 			.render({
-				canvasContext: canvas.getContext('2d'),
-				viewport: page.getViewport(scale),
+				canvasContext: canvas.getContext('2d') as CanvasRenderingContext2D,
+				viewport: page.getViewport({scale}),
 			})
-			.promise.then(function () {
+			.promise.then(() => {
 				return canvas;
 			})
-			.catch((err) => {
+			.catch((err : any) => {
 				console.log(err);
 				return err;
 			});
-	} catch (err) {
+	} catch (err: any) {
 		return err;
 	}
 }
